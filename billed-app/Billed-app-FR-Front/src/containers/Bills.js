@@ -2,6 +2,7 @@ import { ROUTES_PATH } from '../constants/routes.js'
 import { formatDate, formatStatus } from "../app/format.js"
 import Logout from "./Logout.js"
 
+
 export default class {
   constructor({ document, onNavigate, store, localStorage }) {
     this.document = document
@@ -28,12 +29,15 @@ export default class {
   }
 
   getBills = () => {
+    
     if (this.store) {
       return this.store
       .bills()
       .list()
       .then(snapshot => {
+       
         const bills = snapshot
+        
           .map(doc => {
             try {
               return {
@@ -52,8 +56,9 @@ export default class {
               }
             }
           })
+          const billsSorted = bills?.sort((a, b) => ((a.date < b.date) ? 1 : -1))
           console.log('length', bills.length)
-        return bills
+        return billsSorted
       })
     }
   }
