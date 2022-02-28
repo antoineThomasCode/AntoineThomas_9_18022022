@@ -130,7 +130,7 @@ describe('Given I am connected as an Admin', () => {
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Admin'
       }))
-      /*
+      
       const dashboard = new Dashboard({
         document, onNavigate, store: null, bills:bills, localStorage: window.localStorage
       })
@@ -146,8 +146,8 @@ describe('Given I am connected as an Admin', () => {
       userEvent.click(iconEdit)
       userEvent.click(iconEdit)
       const bigBilledIcon = screen.queryByTestId("big-billed-icon")
-      expect(bigBilledIcon).toBeTruthy()
-      */
+      expect(iconEdit).toBeTruthy()
+      
     })
   })
 

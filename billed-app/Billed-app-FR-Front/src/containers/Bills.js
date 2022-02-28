@@ -56,9 +56,9 @@ export default class {
               }
             }
           })
-          const billsSorted = bills?.sort((a, b) => ((a.date < b.date) ? 1 : -1))
+         
           console.log('length', bills.length)
-        return billsSorted
+        return bills
       })
     }
   }
