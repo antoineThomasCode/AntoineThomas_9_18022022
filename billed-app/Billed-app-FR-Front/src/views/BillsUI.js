@@ -20,12 +20,13 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+  const billsSorted = data?.sort((a, b) => ((a.date < b.date) ? 1 : -1))
+  return (billsSorted && billsSorted.length) ? billsSorted.map(bill => row(bill)).join("") : ""
 }
 
 export default ({ data: bills, loading, error }) => {
   
-  const billsSorted = bills?.sort((a, b) => ((a.date < b.date) ? 1 : -1))
+  
   const modal = () => (`
     <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -70,7 +71,7 @@ export default ({ data: bills, loading, error }) => {
               </tr>
           </thead>
           <tbody data-testid="tbody">
-            ${rows(billsSorted)}
+            ${rows(bills)}
           </tbody>
           </table>
         </div>
