@@ -48,7 +48,7 @@ export default class NewBill {
           this.fileName = fileName
         }).catch(error => console.error(error))
     } else  {
-      fileInput.insertAdjacentHTML('afterend', "<p id='error-format' class='error-img-type' data-testid='error-msg'>Le format de votre image n'est pas valide (jpg, jpeg ou png)</p>")
+      fileInput.insertAdjacentHTML('afterend', "<p id='error-format' class='error-img-type' data-testid='error-format'>Le format de votre image n'est pas valide (jpg, jpeg ou png)</p>")
       fileInput.value = null
     }
   }

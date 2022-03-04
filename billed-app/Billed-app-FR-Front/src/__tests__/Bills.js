@@ -69,7 +69,7 @@ describe("Given I am connected as an employee", () => {
     })
     describe("An Error during the loading", () => {
       test("It should display an error page", () => {
-        const html = BillsUI({ error: 'there is an error' })
+        const html = BillsUI({ error: 'error is sumulate' })
         document.body.innerHTML = html
         expect(screen.getAllByText('Erreur')).toBeTruthy()
       })
