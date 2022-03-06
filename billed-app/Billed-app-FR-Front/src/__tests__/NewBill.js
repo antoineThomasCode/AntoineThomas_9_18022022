@@ -3,7 +3,6 @@
  */
 
 import { screen, waitFor, fireEvent } from "@testing-library/dom"
-import userEvent from '@testing-library/user-event'
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
 import mockedBills from "../__mocks__/store"
@@ -76,7 +75,7 @@ describe("Given I am connected as an employee", () => {
     })
   })
 })
-// test with the wrong format 
+
 describe("I add a file in the input for adding a new bill ", () => {
   test("the fill I added should be detected", () =>{
     const newBillForTest = new NewBill({ document, onNavigate, store: Store, localStorage: window.localStorage })
@@ -91,8 +90,7 @@ describe("I add a file in the input for adding a new bill ", () => {
     // change function listener should be called 
     expect(handleChangeFile).toHaveBeenCalledTimes(1)
   })
-  // test width a good format
-  test("Then an error occured if its a bad format file", () =>{
+  test("I try to submit a bill with the wrong format", () =>{
     const testnewBill = new NewBill({ document, onNavigate, store: Store, localStorage: window.localStorage })
     const handleChangeFile = jest.fn(testnewBill.handleChangeFile)
     const myFile = screen.getByTestId('file')
@@ -141,9 +139,21 @@ describe("When I've completed well the formular and I clicked on submit", () => 
 describe("Given I am a user connected as Employee", () => {
   describe("When I navigate to New Bill", () => {
     it("Should send the new bill to the back end", async () => {
+      const validBill = {
+        type: "Transports",
+        name: "Bus",
+        amount: "15",
+        date: "2022-03-02",
+        vat: "10",
+        pct: "10",
+        commentary: "This is a valid bill",
+        fileUrl: "https://test.storage.tld/v0/b/billable-677b6.a…61.jpeg?alt=media&token=7685cd61-c112-42bc-9929-8a799bb82d8b",
+        fileName: "valid-image.jpg"
+      }
        const postSpy = jest.spyOn(mockedBills, "bills")
-       const bills = await mockedBills.bills()
+       const bills = await mockedBills.bills().update(validBill)
        expect(postSpy).toHaveBeenCalledTimes(1)
+       expect(bills.id).toBe('47qAXb6fIm2zOKkLzMro')
     })
     test("send data and simulate an 404 error ", async () => {
       mockedBills.bills.mockImplementationOnce(() =>
