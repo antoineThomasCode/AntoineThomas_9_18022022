@@ -12,6 +12,7 @@ import router from "../app/Router.js";
 import {localStorageMock} from '../__mocks__/localStorage.js';
 import Store from "../app/Store.js"
 import BillsUI from '../views/BillsUI.js';
+import store from '../__mocks__/store'
 
 
 const onNavigate = ((pathname) => {
@@ -107,16 +108,16 @@ describe("I add a file in the input for adding a new bill ", () => {
 })
 describe("When I've completed well the formular and I clicked on submit", () => {
   test("Then a new bill is created", () =>{
-    const testnewBill = new NewBill({ document, onNavigate, store: Store, localStorage: window.localStorage })
+    const testnewBill = new NewBill({ document, onNavigate, store: store, localStorage: window.localStorage })
     const validBill = {
       type: "Transports",
       name: "Bus",
-      amount: "3",
-      date: "2021-09-09",
-      vat: "4",
-      pct: "3",
+      amount: "15",
+      date: "2022-03-02",
+      vat: "10",
+      pct: "10",
       commentary: "This is a valid bill",
-      fileUrl: "https://firebasestorage.googleapis.com/v0/b/billable-677b6.appspot.com/o/justificatifs%2Fkitano-wonda2.png?alt=media&token=bc383c25-b7b2-47e2-bdb9-f11e519cdd3a",
+      fileUrl: "https://test.storage.tld/v0/b/billable-677b6.a…61.jpeg?alt=media&token=7685cd61-c112-42bc-9929-8a799bb82d8b",
       fileName: "valid-image.jpg"
     }
     const handleSubmit = jest.fn((e) => testnewBill.handleSubmit(e))
@@ -136,10 +137,7 @@ describe("When I've completed well the formular and I clicked on submit", () => 
     expect(handleSubmit).toBeCalledTimes(1)
   })
 })
-
-
 //  integration test for POST 
-
 describe("Given I am a user connected as Employee", () => {
   describe("When I navigate to New Bill", () => {
     it("Should send the new bill to the back end", async () => {
@@ -167,3 +165,4 @@ describe("Given I am a user connected as Employee", () => {
     })
   })
 })
+
